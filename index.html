@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AI Background Remover</title>
+
+</head>
+<body>
+<script>
+
+async function removeBg(){
+  const res = await fetch("http://157.254.189.11");
+  
+  const response = await res.json();
+  console.log(response)
+}
+
+ removeBg();
+
+
+</script>
+
+</body>
+</html>
