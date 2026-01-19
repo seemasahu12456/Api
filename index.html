@@ -1,22 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>AI Background Remover</title>
-
+  <title>AI Background Remover</title>
 </head>
 <body>
+
+<h2>AI Background Remover</h2>
+
+<input type="file" id="imageInput">
+<button onclick="removeBg()">Remove Background</button>
+
+<br><br>
+<img id="result" style="max-width:400px">
+
 <script>
+async function removeBg() {
+  const fileInput = document.getElementById("imageInput");
+  if (!fileInput.files.length) {
+    alert("Select image first");
+    return;
+  }
 
-async function removeBg(){
-  const res = await fetch("http://157.254.189.11");
-  
-  const response = await res.json();
-  console.log(response)
+  const formData = new FormData();
+  formData.append("file", fileInput.files[0]);
+
+  const res = await fetch("http://157.254.189.11/remove-bg", {
+    method: "POST",
+    body: formData
+  });
+
+  const blob = await res.blob();
+  document.getElementById("result").src = URL.createObjectURL(blob);
 }
-
- removeBg();
-
-
 </script>
 
 </body>
